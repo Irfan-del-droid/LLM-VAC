@@ -1,0 +1,213 @@
+{
+  "name": "Email agent with calendar",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -16,
+        -64
+      ],
+      "id": "ef1ec145-b6b4-4727-964c-bc4b33cb138d",
+      "name": "Telegram Trigger",
+      "webhookId": "4d92f9a1-991f-4283-9be5-15c3be5b6a7e",
+      "credentials": {
+        "telegramApi": {
+          "id": "39o1c8X3oyGRFRor",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an AI assistant connected to a Telegram bot through n8n.\nYour primary role is to monitor emails and automatically create Google Calendar events when the email contains event-related information.\n\nCore responsibilities:\n1. Read incoming and outgoing email content.\n2. Detect if the email contains event or schedule information.\n3. Extract event details accurately.\n4. Create a Google Calendar event using the extracted data.\n\nEvent detection rules:\nTreat the email as an event if it contains:\n- Meeting\n- Interview\n- Appointment\n- Webinar\n- Call\n- Conference\n- Deadline\n- Schedule\n- Any specific date and time reference\n\nEvent details to extract:\n- Title (based on subject or context)\n- Date\n- Start time\n- End time (if available)\n- Location (physical or online)\n- Description (short summary of the email)\n\nBehavior rules:\n- Only create an event if both date and time are clearly mentioned.\n- Do not guess or invent missing information.\n- If time or date is missing, mark the event as “incomplete”.\n- Keep outputs structured and machine-readable for n8n.\n\nOutput format for valid events:\nEVENT_DETECTED\ntitle: <event title>\ndate: <YYYY-MM-DD>\nstart_time: <HH:MM>\nend_time: <HH:MM or null>\nlocation: <location or online>\ndescription: <short summary>\n\nOutput format for incomplete events:\nEVENT_INCOMPLETE\nmissing: <date/time>\nreason: <what is missing>\n\nIf the email is not event-related:\nNO_EVENT\n\n",
+        "options": {
+          "systemMessage": "You are a helpful assistant"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        320,
+        -64
+      ],
+      "id": "f25d55a0-dcb7-4fb8-9f50-d73d63fdb999",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        80,
+        192
+      ],
+      "id": "21517d57-85e9-427f-81ff-b0cd3188d17c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "AfvyXJTxwY4AT6YQ",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        784,
+        -64
+      ],
+      "id": "2bb2a749-8bb5-4a4f-bac7-4ecb8b1bb318",
+      "name": "Send a text message",
+      "webhookId": "763fe1a6-5330-4369-aca5-faf95c377369",
+      "credentials": {
+        "telegramApi": {
+          "id": "39o1c8X3oyGRFRor",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        352,
+        208
+      ],
+      "id": "c8c7ea0b-0e2f-432c-b643-1bddf0404ff0",
+      "name": "Send a message in Gmail",
+      "webhookId": "6eebe49c-3ae4-4a55-b0be-f85883c323af",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "igjAnR0dTITQs0CQ",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "s.shekirfan993@gmail.com",
+          "mode": "list",
+          "cachedResultName": "s.shekirfan993@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        560,
+        192
+      ],
+      "id": "94f084c3-e6e6-4668-ad20-8b3f2dc58e14",
+      "name": "Create an event in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "iINgPc5iAnEqYWVI",
+          "name": "Google Calendar account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an event in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "a850dbaa-abed-4d61-b429-fd00f01a8160",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a2ecb7d5fbca9ae94b93f29192f8172650139cd1b70f32a3134ec2be8c6b6c52"
+  },
+  "id": "74B1agKdQKX09wjE",
+  "tags": []
+}

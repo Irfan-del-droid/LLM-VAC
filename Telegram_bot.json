@@ -14,15 +14,7 @@
         0,
         0
       ],
-      "id": "9dacecc5-682a-4836-83d5-76b26c246b38",
-      "name": "Telegram Trigger",
-      "webhookId": "b391f8fa-dca7-4e47-9605-d89524703974",
-      "credentials": {
-        "telegramApi": {
-          "id": "39o1c8X3oyGRFRor",
-          "name": "Telegram account"
-        }
-      }
+      "name": "Telegram Trigger"
     },
     {
       "parameters": {
@@ -38,17 +30,11 @@
         208,
         0
       ],
-      "id": "74d6fd78-8f35-4463-96aa-7c6f1d9a0907",
       "name": "AI Agent"
     },
     {
       "parameters": {
-        "model": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-5-mini"
-        },
-        "builtInTools": {},
+        "model": "gpt-5-mini",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
@@ -57,14 +43,7 @@
         80,
         208
       ],
-      "id": "69df3023-e574-4fe5-9fd1-c515aa2f16ee",
-      "name": "OpenAI Chat Model",
-      "credentials": {
-        "openAiApi": {
-          "id": "AfvyXJTxwY4AT6YQ",
-          "name": "n8n free OpenAI API credits"
-        }
-      }
+      "name": "OpenAI Chat Model"
     },
     {
       "parameters": {
@@ -78,18 +57,9 @@
         560,
         0
       ],
-      "id": "ba67a6ce-2149-4edb-8007-aa6f5cbf283f",
-      "name": "Send a text message",
-      "webhookId": "7ed1e900-190c-47ac-a710-410b2080f3bd",
-      "credentials": {
-        "telegramApi": {
-          "id": "39o1c8X3oyGRFRor",
-          "name": "Telegram account"
-        }
-      }
+      "name": "Send a text message"
     }
   ],
-  "pinData": {},
   "connections": {
     "Telegram Trigger": {
       "main": [
@@ -127,15 +97,6 @@
   },
   "active": false,
   "settings": {
-    "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": false
-  },
-  "versionId": "017a179b-c41d-40e3-a80b-48144a0de3cb",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "a2ecb7d5fbca9ae94b93f29192f8172650139cd1b70f32a3134ec2be8c6b6c52"
-  },
-  "id": "i93URKJngvtwoEap",
-  "tags": []
+    "executionOrder": "v1"
+  }
 }

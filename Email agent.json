@@ -14,12 +14,12 @@
         -320,
         -48
       ],
-      "id": "178b418a-b2fa-4caa-bc0b-b2179463f7ff",
+      "id": "",
       "name": "Telegram Trigger",
-      "webhookId": "ee05e4fd-3148-476c-89bc-49f4ad715243",
+      "webhookId": "",
       "credentials": {
         "telegramApi": {
-          "id": "39o1c8X3oyGRFRor",
+          "id": "",
           "name": "Telegram account"
         }
       }
@@ -38,7 +38,7 @@
         48,
         -48
       ],
-      "id": "fe6afe67-6427-4c32-86d7-f468708a1e95",
+      "id": "",
       "name": "AI Agent"
     },
     {
@@ -57,11 +57,11 @@
         -240,
         272
       ],
-      "id": "0a1ffeee-28b8-41c7-894a-4bf4800bab84",
+      "id": "",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
-          "id": "AfvyXJTxwY4AT6YQ",
+          "id": "Q",
           "name": "n8n free OpenAI API credits"
         }
       }
@@ -78,12 +78,12 @@
         320,
         272
       ],
-      "id": "e35afb4a-b62f-4b61-9046-6641a71ae055",
+      "id": "",
       "name": "Get many messages in Gmail",
-      "webhookId": "df3cffe4-4357-453c-ae90-2d6f6d47c75c",
+      "webhookId": "",
       "credentials": {
         "gmailOAuth2": {
-          "id": "igjAnR0dTITQs0CQ",
+          "id": "",
           "name": "Gmail account"
         }
       }
@@ -100,12 +100,12 @@
         416,
         -48
       ],
-      "id": "5533e0f6-823d-4808-8828-4ea2287cd76e",
+      "id": "",
       "name": "Send a text message1",
-      "webhookId": "c6601eb0-7238-41c1-b926-5598787bfd51",
+      "webhookId": "",
       "credentials": {
         "telegramApi": {
-          "id": "39o1c8X3oyGRFRor",
+          "id": "",
           "name": "Telegram account"
         }
       }
@@ -123,12 +123,12 @@
         64,
         272
       ],
-      "id": "e6b4261a-1529-4847-9613-4b6c7ddebe62",
+      "id": "",
       "name": "Send a message in Gmail",
-      "webhookId": "09b1c00b-1c77-44dd-be03-8c246342b8e5",
+      "webhookId": "",
       "credentials": {
         "gmailOAuth2": {
-          "id": "igjAnR0dTITQs0CQ",
+          "id": "",
           "name": "Gmail account"
         }
       }
@@ -203,11 +203,11 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "fef20831-cbbb-427a-ab33-36394f2cf3bd",
+  "versionId": "",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "a2ecb7d5fbca9ae94b93f29192f8172650139cd1b70f32a3134ec2be8c6b6c52"
+    "instanceId": ""
   },
-  "id": "ITqfG6ltqMpibhxZ",
+  "id": "",
   "tags": []
 }
